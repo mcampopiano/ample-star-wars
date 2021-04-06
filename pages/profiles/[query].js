@@ -45,7 +45,13 @@ const characterProfile = ({ characters }) => {
                             <p>Weight: {character.mass}</p>
                             <p>Hair color: {character.hair_color}</p>
                             <p>Birth year: {character.birth_year}</p>
-                            <p>Species: {character.species.length === 0 ? "human" : `${character.species}`}</p>
+                            <p>Species: {character.species.length === 0 
+                            ? "human" 
+                            : character.species.map(species => {
+                                const {data, error} = getData(species)
+                                if (!data) return "loading"
+                                return data.name
+                            })}</p>
                         </section>
                         <section className="films">
                             <h2>Films appeared in</h2>
@@ -75,11 +81,11 @@ const characterProfile = ({ characters }) => {
                                         } 
                                     })
                                 }
+                            </ul>
                                 {
                                     character.starships.length === 0 &&
                                     `${character.name} did not fly any starships. At least not on camera! ;)`
                                 }
-                            </ul>
                         </section>
                     </div>
                 ))
