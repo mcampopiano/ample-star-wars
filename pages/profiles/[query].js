@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import useSWR from 'swr'
 
 export async function getServerSideProps(context) {
     const res = await fetch(`https://swapi.dev/api/people/?search=${context.params.query}`)
@@ -12,7 +13,21 @@ export async function getServerSideProps(context) {
 
 }
 
+
 const characterProfile = ({ characters }) => {
+
+    const fetcher = (url) => fetch(url).then(res => res.json())
+    const getData = url => {
+        try {
+
+            const {data, error} = useSWR(`${url}`, fetcher)
+            return {data, error}
+        } catch (error) {
+            console.log('error: ', error)
+            throw error
+        }
+    }
+
     return (
         <>
             <h2>
@@ -36,9 +51,14 @@ const characterProfile = ({ characters }) => {
                             <h2>Films appeared in</h2>
                             <ul>
                                 {
-                                    character.films.map(film => (
-                                        <li>{film}</li>
-                                    ))
+                                    character.films.map(film => {
+                                        const {data, error} = getData(film)
+                                        console.log("title", data)
+                                        if (data !== undefined){
+
+                                            return  <li>{data.title}</li>
+                                        }
+                                    })
                                 }
                             </ul>
                         </section>
