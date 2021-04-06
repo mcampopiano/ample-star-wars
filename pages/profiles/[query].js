@@ -20,8 +20,8 @@ const characterProfile = ({ characters }) => {
     const getData = url => {
         try {
 
-            const {data, error} = useSWR(`${url}`, fetcher)
-            return {data, error}
+            const { data, error } = useSWR(`${url}`, fetcher)
+            return { data, error }
         } catch (error) {
             console.log('error: ', error)
             throw error
@@ -52,10 +52,11 @@ const characterProfile = ({ characters }) => {
                             <ul>
                                 {
                                     character.films.map(film => {
-                                        const {data, error} = getData(film)
-                                        if (data !== undefined){
+                                        const { data, error } = getData(film)
+                                        if (!data) return "loading"
+                                        if (data !== undefined) {
 
-                                            return  <li key={data.id}>{data.title}</li>
+                                            return <li key={data.id}>{data.title}</li>
                                         }
                                     })
                                 }
@@ -65,9 +66,18 @@ const characterProfile = ({ characters }) => {
                             <h2>Starships flown</h2>
                             <ul>
                                 {
-                                    character.starships.map(ship => (
-                                        <li>{ship}</li>
-                                    ))
+                                    character.starships.map(ship => {
+                                        const { data, error } = getData(ship)
+                                        if (!data) return "loading"
+                                        if (data !== undefined && data.length > 0) {
+
+                                            return <li key={data.id}>{data.name}</li>
+                                        } 
+                                    })
+                                }
+                                {
+                                    character.starships.length === 0 &&
+                                    `${character.name} did not fly any starships. At least not on camera! ;)`
                                 }
                             </ul>
                         </section>
