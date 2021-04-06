@@ -30,10 +30,27 @@ const characterProfile = ({ characters }) => {
                             <p>Weight: {character.mass}</p>
                             <p>Hair color: {character.hair_color}</p>
                             <p>Birth year: {character.birth_year}</p>
-                            <p>Species: {character.species.length === 0 ? "human" : "unknown"}</p>
+                            <p>Species: {character.species.length === 0 ? "human" : `${character.species}`}</p>
                         </section>
                         <section className="films">
                             <h2>Films appeared in</h2>
+                            <ul>
+                                {
+                                    character.films.map(film => (
+                                        <li>{film}</li>
+                                    ))
+                                }
+                            </ul>
+                        </section>
+                        <section className="starships">
+                            <h2>Starships flown</h2>
+                            <ul>
+                                {
+                                    character.starships.map(ship => (
+                                        <li>{ship}</li>
+                                    ))
+                                }
+                            </ul>
                         </section>
                     </div>
                 ))
