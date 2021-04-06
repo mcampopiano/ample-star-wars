@@ -37,7 +37,7 @@ const characterProfile = ({ characters }) => {
             </h2>
             {
                 characters.map(character => (
-                    <div className="profile-section">
+                    <div className="profile-section" key={character.id}>
                         <h1>{character.name}</h1>
                         <section className="about-me">
                             <h2>About me</h2>
@@ -53,10 +53,9 @@ const characterProfile = ({ characters }) => {
                                 {
                                     character.films.map(film => {
                                         const {data, error} = getData(film)
-                                        console.log("title", data)
                                         if (data !== undefined){
 
-                                            return  <li>{data.title}</li>
+                                            return  <li key={data.id}>{data.title}</li>
                                         }
                                     })
                                 }
