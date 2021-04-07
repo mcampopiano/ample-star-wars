@@ -1,61 +1,60 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-// import '../styles/starwarsintro.module.css'
 
 export default function Home() {
   const router = useRouter()
   return (
     <>
-    <div className="big-container">
-      {/* Place in Body where you'd like intro to appear  */}
-      <div className="star-wars-intro">
-        <Image
-          className="background-image"
-          src="/star.jpg"
-          alt="Stars in the nightsky"
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center" />
+      <div className="big-container">
+        {/* Place in Body where you'd like intro to appear  */}
+        <div className="star-wars-intro">
+          <Image
+            className="background-image"
+            src="/star.jpg"
+            alt="Stars in the nightsky"
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center" />
 
 
-        {/* <!-- Blue Intro Text --> */}
-        <p className="intro-text">
-          A few days ago, I received...
-  </p>
+          {/* <!-- Blue Intro Text --> */}
+          <p className="intro-text">
+            A few days ago, I received...
+          </p>
 
-        {/* <!-- Logo Image or Text goes in here --> */}
-        <h2 className="main-logo">
-          AMPLE CODING CHALLENGE
-          {/* <img src="img/star-wars-intro.png" /> */}
+          {/* <!-- Logo Image or Text goes in here --> */}
+          <h2 className="main-logo">
+            AMPLE CODING CHALLENGE
         </h2>
 
-        {/* <!-- All Scrolling Content Goes in here --> */}
-        <div className="main-content">
+          {/* <!-- All Scrolling Content Goes in here --> */}
+          <div className="main-content">
 
-          <div className="title-content">
-            <p className="content-header">EPISODE I<br />The First Round Challenge</p>
+            <div className="title-content">
+              <p className="content-header">EPISODE I<br />The First Round Challenge</p>
 
-            {/* <br> */}
+              {/* <br> */}
 
-            <p className="content-body">
-              I was so excited for the opportunity to work on this challenge! Star Wars was my key for getting to know my wife, so it will always have a special place in my heart. This was my first project implementing Next.js, so it was a ton of fun getting to know the framework. There is plenty that is different from what I'm used to, styling in particular turned out to be trickier than I anticipated, but that is the fun of coding for me: always new things to learn! I'm grateful I had this chance to explore Next.js. I hid a few funny things in here, I hope you find and enjoy them. Thanks again for the opportunity to do this challenge, scroll down to begin your search!
+              <p className="content-body">
+                I was so excited for the opportunity to work on this challenge! Star Wars was my key for getting to know my wife, so it will always have a special place in my heart. This was my first project implementing Next.js, so it was a ton of fun getting to know the framework. There is plenty that is different from what I'm used to, styling in particular turned out to be trickier than I anticipated, but that is the fun of coding for me: always new things to learn! I'm grateful I had this chance to explore Next.js. I hid a few funny things in here, I hope you find and enjoy them. Thanks again for the opportunity to do this challenge, scroll down to begin your search!
       </p>
 
+            </div>
           </div>
         </div>
-      </div>
-      <h1 className="search-line">
-        Search for a Star Wars character by name
+        <h1 className="search-line">
+          Search for a Star Wars character by name
             </h1>
-      <form className="form" onSubmit={event => {
-        event.preventDefault()
-        router.push(`/profiles/${event.target.search.value}`)
-      }}>
-        <input name='search' id="search" type='text' />
-        <button>
-          search</button>
-      </form>
-      <style jsx>{`
+            {/* Takes the value the user types into the input and appends it to the end of the url */}
+        <form className="form" onSubmit={event => {
+          event.preventDefault()
+          router.push(`/profiles/${event.target.search.value}`)
+        }}>
+          <input name='search' id="search" type='text' />
+          <button>
+            search</button>
+        </form>
+        <style jsx>{`
 
         .search-line, .form {
           width: fit-content;
@@ -260,7 +259,7 @@ export default function Home() {
             animation: scroll 100s linear 4s forwards;
           }
         }`}</style>
-        </div>
+      </div>
     </>
   )
 }

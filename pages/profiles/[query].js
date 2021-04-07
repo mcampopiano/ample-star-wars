@@ -2,6 +2,8 @@ import Link from 'next/link'
 import useSWR from 'swr'
 
 export async function getServerSideProps(context) {
+    /* Takes the query paramater in the url and appends it to the http request, 
+        Then converts it to json and returns the results as the value to the characters variable*/
     const res = await fetch(`https://swapi.dev/api/people/?search=${context.params.query}`)
     const json = await res.json()
     const data = json.results
@@ -15,8 +17,15 @@ export async function getServerSideProps(context) {
 
 
 const characterProfile = ({ characters }) => {
-
+    
+    /* fetcher takes a url as a parameter then makes an http request to that url, then parses the returned 
+    JSON string into a javascript object and returns that object.
+    */
     const fetcher = (url) => fetch(url).then(res => res.json())
+
+    /* Takes a url as a parameter, then passes that url as the first argument
+    to the useSWR function, and the the fetcher function as the second argument. useSWR
+    then passes that first argument as the argument to fetcher and runs it.*/
     const getData = url => {
         try {
 
