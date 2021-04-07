@@ -38,19 +38,16 @@ export default function Home() {
             {/* <br> */}
 
             <p className="content-body">
-              After years of galactic silence, civilization is on the brink of a new Star Wars release. Now, with the Force preparing to awaken, the people of Earth seek solace in films of old. With nowhere to turn, they gather in great numbers and watch the original trilogy without rest. Three films. 6 hours. 24 minutes. Popcorn. Slushies. Total elation.
+              I was so excited for the opportunity to work on this challenge! Star Wars was my key for getting to know my wife, so it will always have a special place in my heart. This was my first project implementing Next.js, so it was a ton of fun getting to know the framework. There is plenty that is different from what I'm used to, styling in particular turned out to be trickier than I anticipated, but that is the fun of coding for me: always new things to learn! I'm grateful I had this chance to explore Next.js. I hid a few funny things in here, I hope you find and enjoy them. Thanks again for the opportunity to do this challenge, scroll down to begin your search!
       </p>
-
-            {/* <!-- button or link or whatever --> */}
-            <a href="./StarScroll.zip" className="space-button">Download The Code Now!</a>
 
           </div>
         </div>
       </div>
-      <h1>
+      <h1 className="search-line">
         Search for a Star Wars character by name
             </h1>
-      <form onSubmit={event => {
+      <form className="form" onSubmit={event => {
         event.preventDefault()
         router.push(`/profiles/${event.target.search.value}`)
       }}>
@@ -59,6 +56,11 @@ export default function Home() {
           search</button>
       </form>
       <style jsx>{`
+
+        .search-line, .form {
+          width: fit-content;
+          margin: auto;
+        }
         
         .background-image {
           height: 100%;
