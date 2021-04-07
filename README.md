@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+You will need Node.js 10.13 or later. If you don't, download it [here](https://nodejs.org/en/).
+
 First, run the development server:
 
 ```bash
