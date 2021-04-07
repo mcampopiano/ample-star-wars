@@ -6,10 +6,11 @@ export default function Home() {
   const router = useRouter()
   return (
     <>
+    <div className="big-container">
       {/* Place in Body where you'd like intro to appear  */}
       <div className="star-wars-intro">
         <Image
-          className="landing-image"
+          className="background-image"
           src="/star.jpg"
           alt="Stars in the nightsky"
           layout="fill"
@@ -59,9 +60,9 @@ export default function Home() {
       </form>
       <style jsx>{`
         
-        .landing-image {
+        .background-image {
           height: 100%;
-          widght: 100%;
+          width: 100%;
           z-index: 0
         }
 
@@ -257,6 +258,7 @@ export default function Home() {
             animation: scroll 100s linear 4s forwards;
           }
         }`}</style>
+        </div>
     </>
   )
 }
