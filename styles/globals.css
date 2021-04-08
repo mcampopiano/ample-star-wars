@@ -9,8 +9,12 @@ body, html{
   div {
     z-index: 1;
   }
-  a:visited {
+  a, a:visited {
     color: #EBD71C;
+  }
+
+  a:hover {
+    color:blue;
   }
 
   .background-image {

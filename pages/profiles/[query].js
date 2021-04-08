@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
 
 
 const characterProfile = ({ characters }) => {
-    
+
     /* fetcher takes a url as a parameter then makes an http request to that url, then parses the returned 
     JSON string into a javascript object and returns that object.
     */
@@ -37,80 +37,113 @@ const characterProfile = ({ characters }) => {
         }
     }
 
-    return (
-        <>
+    if (characters.length > 1) {
+        return (
+            <>
+                <h2>
+                    <Link href="/">
+                        <a>Home</a>
+                    </Link>
+                </h2>
+                <h1>Looks like there is more than one character who might meet your search criteria. Please select the profile you would like to view.</h1>
+                {
+                    characters.map(character => (
+                        <Link href={'/profiles/' + character.name}>
+                            <a><h3>{character.name}</h3></a>
+                        </Link>
+
+                    ))
+                }
+            </>
+        )
+    } else if (characters.length === 0) {
+        return <>
             <h2>
                 <Link href="/">
                     <a>Home</a>
                 </Link>
             </h2>
-            {
-                characters.map(character => (
-                    <div className="profile-section" key={character.id}>
-                        <h1 className="header">{character.name}</h1>
-                        <div className="about">
-                            <section className="about-me">
-                                <h2>About me</h2>
-                                <p>I'm a {character.height} cm tall {character.species.length === 0
-                                    ? "human"
-                                    : character.species.map(species => {
-                                        const { data, error } = getData(species)
-                                        if (!data) return "loading..."
-                                        return data.name
-                                    })}, and {character.gender === "female"
-                                        ? `I have ${character.hair_color} hair. It's rude to ask a woman's weight or age, so I won't tell you either.`
-                                        : `I weigh ${character.mass} kg`}
-                                </p>
-                                <p>
-                                    {character.gender !== "female"
-                                        ? `I was born in ${character.birth_year}`
-                                        : ""} {character.gender === "female" || character.hair_color === "n/a"
-                                            || character.hair_color === "unknown"
-                                            || character.hair_color === "none"
-                                            ? ""
-                                            : ` with ${character.hair_color} hair.`}
-                                </p>
-                            </section>
-                            <section className="films">
-                                <h2>Films appeared in</h2>
-                                <ul>
-                                    {
-                                        character.films.map(film => {
-                                            const { data, error } = getData(film)
-                                            if (!data) return "loading"
-                                            if (data !== undefined) {
+            <h1>Hmm, unfortunately it looks like no star wars characters matched your search.</h1>
+            <h2>It's possible that the name was mispelled, or that the character is from a film outside of the original saga (episodes I-VI). Please return to the homepage to search for a different character. We apologize for the inconvenience.</h2>
+        </>
+    }
 
-                                                return <li key={data.id}>{data.title}</li>
-                                            }
-                                        })
-                                    }
-                                </ul>
-                            </section>
-                            <section className="starships">
-                                <h2>Starships flown</h2>
-                                <ul>
-                                    {
-                                        character.starships.map(ship => {
-                                            const { data, error } = getData(ship)
-                                            if (!data) return "loading"
-                                            if (data !== undefined && data.length > 0) {
+    else {
 
-                                                return <li key={data.id}>{data.name}</li>
-                                            }
-                                        })
+        return (
+            <>
+                <h2>
+                    <Link href="/">
+                        <a>Home</a>
+                    </Link>
+                </h2>
+                {
+                    characters.map(character => (
+                        <div className="profile-section" key={character.id}>
+                            <h1 className="header">{character.name}</h1>
+                            <div className="about">
+                                <section className="about-me">
+                                    <h2>About me</h2>
+                                    <p>I'm a {character.height} cm tall {character.species.length === 0
+                                        ? "human"
+                                        : character.species.map(species => {
+                                            const { data, error } = getData(species)
+                                            if (!data) return "loading..."
+                                            return data.name
+                                        })}, and {character.gender === "female"
+                                            ? `I have ${character.hair_color} hair. It's rude to ask a woman's weight or age, so I won't tell you either.`
+                                            : `I weigh ${character.mass} kg`}
+                                    </p>
+                                    <p>
+                                        {character.gender !== "female"
+                                            ? `I was born in ${character.birth_year}`
+                                            : ""} {character.gender === "female" || character.hair_color === "n/a"
+                                                || character.hair_color === "unknown"
+                                                || character.hair_color === "none"
+                                                ? ""
+                                                : ` with ${character.hair_color} hair.`}
+                                    </p>
+                                </section>
+                                <section className="films">
+                                    <h2>Films appeared in</h2>
+                                    <ul>
+                                        {
+                                            character.films.map(film => {
+                                                const { data, error } = getData(film)
+                                                if (!data) return "loading"
+                                                if (data !== undefined) {
+
+                                                    return <li key={data.id}>{data.title}</li>
+                                                }
+                                            })
+                                        }
+                                    </ul>
+                                </section>
+                                <section className="starships">
+                                    <h2>Starships flown</h2>
+                                    <ul>
+                                        {
+                                            character.starships.map(ship => {
+                                                const { data, error } = getData(ship)
+                                                if (!data) return "loading"
+                                                if (data !== undefined && data.length > 0) {
+
+                                                    return <li key={data.id}>{data.name}</li>
+                                                }
+                                            })
+                                        }
+                                    </ul>
+                                    {
+                                        character.starships.length === 0 &&
+                                        `I did not fly any starships. At least not on camera! ;)`
                                     }
-                                </ul>
-                                {
-                                    character.starships.length === 0 &&
-                                    `I did not fly any starships. At least not on camera! ;)`
-                                }
-                            </section>
+                                </section>
+                            </div>
                         </div>
-                    </div>
-                ))
-            }
-            <style jsx>
-                {`
+                    ))
+                }
+                <style jsx>
+                    {`
                 .header {
                     width: fit-content;
                     margin: auto;
@@ -128,9 +161,10 @@ const characterProfile = ({ characters }) => {
                     width: fit-content;
                 }
                 `}
-            </style>
-        </>
-    )
+                </style>
+            </>
+        )
+    }
 }
 
 export default characterProfile

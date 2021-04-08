@@ -45,10 +45,15 @@ export default function Home() {
         <h1 className="search-line">
           Search for a Star Wars character by name
             </h1>
-            {/* Takes the value the user types into the input and appends it to the end of the url */}
+        {/* Takes the value the user types into the input and appends it to the end of the url */}
         <form className="form" onSubmit={event => {
-          event.preventDefault()
-          router.push(`/profiles/${event.target.search.value}`)
+          if (event.target.search.value === "") {
+            event.preventDefault()
+            window.alert("Please enter a name to search")
+          } else {
+            event.preventDefault()
+            router.push(`/profiles/${event.target.search.value}`)
+          }
         }}>
           <input name='search' id="search" type='text' />
           <button>
