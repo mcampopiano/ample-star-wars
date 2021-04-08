@@ -65,7 +65,7 @@ const characterProfile = ({ characters }) => {
           </Link>
         </h2>
         <h1>
-          Hmm, unfortunately it looks like no star wars characters matched your
+          Hmm, unfortunately it looks like no Star Wars characters matched your
           search.
         </h1>
         <h2>
@@ -159,6 +159,7 @@ const characterProfile = ({ characters }) => {
               position: absolute;
               z-index: 1;
             }
+
             .header {
               width: fit-content;
               margin: auto;
@@ -169,7 +170,7 @@ const characterProfile = ({ characters }) => {
             .about {
               display: flex;
               justify-content: space-around;
-              margin-top: 10px;
+              margin-top: 100px;
             }
 
             .about-me,
