@@ -6,9 +6,6 @@ body, html{
     background-color: #000;
   }
 
-  div {
-    z-index: 1;
-  }
   a, a:visited {
     color: #EBD71C;
   }
